@@ -11,7 +11,7 @@
       v-for="person in data.people"
       :key="person.id"
     >
-      {{ person.name }} ({{ person.age }})
+      <router-link :to="{ path: `/person/${person.id}` }">{{ person.name }} ({{ person.age }})</router-link>
     </div>
   </template>
 </template>
