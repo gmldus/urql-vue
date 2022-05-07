@@ -2,7 +2,7 @@
   <template v-if="fetching">
     Loading...
   </template>
-  <template v-else-if="erorr">
+  <template v-else-if="error">
     Error !
   </template>
   <template v-else-if="data && data.people">
