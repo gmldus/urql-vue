@@ -1,4 +1,5 @@
 <template>
+  <button v-if="!getInfo" @click="getInfo = true">Get Info</button>
   <template v-if="fetching">
     Loading...
   </template>
@@ -16,12 +17,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import { useQuery } from '@urql/vue';
 
 export default defineComponent({
   name: 'App',
   setup() {
+    const getInfo = ref(false);
     const { fetching, data, error } = useQuery({
       query: `
         {
@@ -31,10 +33,12 @@ export default defineComponent({
             age
           }
         }
-      `
+      `,
+      pause: computed(() => !getInfo.value)
     });
 
     return {
+      getInfo,
       fetching,
       data,
       error,
